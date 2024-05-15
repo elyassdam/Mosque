@@ -66,6 +66,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.activity:activity:1.9.0")
     implementation("com.google.firebase:firebase-database:21.0.0")
+    implementation("com.google.android.gms:play-services-wallet:19.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -77,4 +78,5 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation("androidx.compose.material3:material3:1.2.1")
 }

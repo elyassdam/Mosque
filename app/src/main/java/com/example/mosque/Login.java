@@ -73,6 +73,9 @@ public class Login extends AppCompatActivity {
                         if (usuario != null && usuario.getPassword().equals(contraseña)) {
                             // El usuario está registrado y la contraseña coincide
                             Toast.makeText(Login.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Login.this, Home.class);
+                            startActivity(intent);
+                            finish();
                             return;
                         }
                     }
