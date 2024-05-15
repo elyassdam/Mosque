@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     private EditText editTextCorreo;
     private EditText editTextContraseña;
@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (esCorreoValido(correo) && esContraseñaValida(contraseña)) {
                     // Correo y contraseña válidos, continuar con el registro
-                    Toast.makeText(MainActivity.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
                 } else {
                     // Mostrar mensaje de error al usuario
-                    Toast.makeText(MainActivity.this, "Correo o contraseña inválidos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Correo o contraseña inválidos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
