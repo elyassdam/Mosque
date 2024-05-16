@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
-    android:id="home"
-    android:title="Home"
+    android:id="@+id/home"
+    android:title="INICIO"
     android:icon="@drawable/ichome"
     />
     <item
-    android:id="home"
-    android:title="Search"
+    android:id="@+id/search"
+    android:title="BUSCAR"
     android:icon="@drawable/icsearch"
     />
     <item
-    android:id="home"
-    android:title="Maps"
-    android:icon="@drawable/icMaps"
+    android:id="@+id/maps"
+    android:title="MAPAS"
+    android:icon="@drawable/icmaps"
     />
+    <item
+        android:id="@+id/pay"
+        android:title="PAGAR"
+        android:icon="@drawable/icpay"
+        />
 </menu>

@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoImagenIslam"
+    android:background="@drawable/fondoimagenislam"
     android:orientation="vertical"
-
     >
 
     <TextView
@@ -52,7 +51,7 @@
         app:layout_constraintEnd_toStartOf="@+id/username"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/emailIcon" />
+        app:srcCompat="@drawable/emailicon" />
 
     <EditText
         android:id="@+id/password"
