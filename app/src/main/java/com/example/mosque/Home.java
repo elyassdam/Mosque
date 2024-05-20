@@ -40,7 +40,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.menu.id.home:
+                    case R.id.home:
                         setFragment(homeFragment);
                         return true;
                     case R.id.search:
@@ -49,7 +49,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                     case R.id.maps:
                         setFragment(mapsFragment);
                         return true;
-                    case menu.id:
+                    case R.id.pay:
                         setFragment(payFragment);
                         return true;
                     default:
