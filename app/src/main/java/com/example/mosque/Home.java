@@ -62,19 +62,5 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
     private void setFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
     }
-}/*
-webView = findViewById(R.id.webView);
-WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true); // Habilitar JavaScript si es necesario
-        webView.loadUrl("https://www.ciacv.org/");
-
-
-@Override
-public void onBackPressed() {
-    if (webView.canGoBack()) {
-        webView.goBack();
-    } else {
-        super.onBackPressed();
-    }
-}*/
+}
 

@@ -16,7 +16,7 @@
         android:text="REGISTRAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.412"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_width="271dp"
         android:layout_height="54dp"
         android:layout_marginEnd="92dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="72dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="text"
