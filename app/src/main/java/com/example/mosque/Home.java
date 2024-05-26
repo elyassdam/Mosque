@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
- class Home extends AppCompatActivity {
+ public class Home extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
 
@@ -20,21 +20,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
     private SearchFragment searchFragment;
     private MapsFragment mapsFragment;
     private PayFragment payFragment;
+    private SalatFragment salatFragment;
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        frameLayout = findViewById(R.id.frame);
+        bottomNavigationView = findViewById(R.id.bottom);
+        frameLayout = findViewById(R.id.framel);
 
         homeFragment = new HomeFragment();
         searchFragment = new SearchFragment();
         mapsFragment = new MapsFragment();
         payFragment = new PayFragment();
+        salatFragment=new SalatFragment();
 
-        setFragment(homeFragment); // Mostrar el fragmento de inicio por defecto
+     //   setFragment(homeFragment); // Mostrar el fragmento de inicio por defecto
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -52,6 +54,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                     case R.id.pay:
                         setFragment(payFragment);
                         return true;
+                    case R.id.salat:
+                        setFragment(salatFragment);
                     default:
                         return false;
                 }
@@ -60,7 +64,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
     }
 
     private void setFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framel, fragment).commit();
     }
 }
 

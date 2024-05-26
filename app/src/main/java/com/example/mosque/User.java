@@ -65,21 +65,12 @@ public class User {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
+
 
     String password;
-    String confirmPassword;
 
-
-
-
-    public User(String userID, String name, String dni, String email,String phone, String dateBirth, String password, String confirmPassword) {
+    public User(String userID, String name, String dni, String email,String phone, String dateBirth, String password) {
         this.userID = userID;
         this.name = name;
         this.email=email;
@@ -87,9 +78,8 @@ public class User {
         this.phone = phone;
         this.dateBirth = dateBirth;
         this.password = password;
-        this.confirmPassword = confirmPassword;
     }
 
-
+public User(){}
 
 }

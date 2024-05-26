@@ -20,4 +20,9 @@
         android:title="PAGAR"
         android:icon="@drawable/icpay"
         />
+    <item
+        android:id="@+id/salat"
+        android:title="SALAT"
+        android:icon="@drawable/icnmosque"
+        />
 </menu>

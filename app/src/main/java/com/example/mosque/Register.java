@@ -1,9 +1,10 @@
 package com.example.mosque;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,35 +14,33 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
 
 public class Register extends AppCompatActivity {
     private EditText editTextName;
-    private EditText editTextdni;
-
+    private EditText editTextDni;
     private DatePickerDialog datePickerDialog;
     private EditText editTextEmail;
     private EditText editTextPhone;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-
     private Button btnRegister;
+    private Button btnBackLogin;
+
     private Button datePickerButton;
-    private DatabaseReference databaseReference;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialize Firebase database reference
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        // Initialize Firestore
+        firestore = FirebaseFirestore.getInstance();
 
         datePickerButton = findViewById(R.id.datePickerButton);
         initDatePicker();
@@ -57,9 +56,20 @@ public class Register extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email);
         editTextPhone = findViewById(R.id.phone);
         editTextPassword = findViewById(R.id.password);
-        editTextdni=findViewById(R.id.confirmPassword);
-        editTextdni=findViewById(R.id.dni);
+        editTextConfirmPassword = findViewById(R.id.confirmPassword);
+        editTextDni = findViewById(R.id.dni);
         btnRegister = findViewById(R.id.btnRegister);
+        btnBackLogin=findViewById(R.id.btnBack);
+        btnBackLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
+                Toast.makeText(Register.this, "Cambiando a Inicio", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,18 +79,33 @@ public class Register extends AppCompatActivity {
                 final String phone = editTextPhone.getText().toString();
                 final String password = editTextPassword.getText().toString();
                 final String confirmPassword = editTextConfirmPassword.getText().toString();
-                final String dni = editTextdni.getText().toString();
+                final String dni = editTextDni.getText().toString();
+
                 // Check if fields are empty
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dateOfBirth) || TextUtils.isEmpty(email) ||
-                        TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(Register.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                        TextUtils.isEmpty(phone) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword) ||
+                        TextUtils.isEmpty(dni)) {
+                    Toast.makeText(Register.this, "Por favor, rellena todos los campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Register user in Firebase database
-                registerUser(name,dni,email, dateOfBirth, phone, password,confirmPassword);
+                // Check if email is valid
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(Register.this, "Introduce un email válido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check if passwords match
+                if (!password.equals(confirmPassword)) {
+                    Toast.makeText(Register.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Register user in Firestore
+                registerUser(name, dni, dateOfBirth, email, phone, password);
             }
         });
+
     }
 
     private String getTodaysDate() {
@@ -111,43 +136,42 @@ public class Register extends AppCompatActivity {
     }
 
     private String getMonthFormat(int month) {
-        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        String[] months = {"Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"};
         if (month >= 1 && month <= 12) {
             return months[month - 1];
         }
-        return "Jan"; // Default value if month is invalid
+        return "Ene"; // Default value if month is invalid
     }
 
     public void openDatePicker() {
         datePickerDialog.show();
     }
 
-    private void registerUser(final String name,final String dni, final String dateOfBirth, final String email,
-                              final String phone, final String password,final String confirmPassword) {
-        // Check if the email is already registered in the Firebase database
-        databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
+    private void registerUser(final String name, final String dni, final String dateOfBirth, final String email,
+                              final String phone, final String password) {
+        // Check if the email is already registered in Firestore
+        firestore.collection("users").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot querySnapshot = task.getResult();
+                if (!querySnapshot.isEmpty()) {
                     // The email is already registered, show error message
-                    Toast.makeText(Register.this, "Email already registered", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "Email ya registrado", Toast.LENGTH_SHORT).show();
                 } else {
                     // The email is not registered, create a new user
-                    String userId = databaseReference.push().getKey(); // Generate a unique ID for the user
-                    User user = new User(userId,name,dni,email,phone, dateOfBirth, password,confirmPassword);
+                    String userId = firestore.collection("users").document().getId(); // Generate a unique ID for the user
+                    User user = new User(userId, name, dni, email, phone, dateOfBirth, password);
 
-                    // Save the user to the Firebase database
-                    databaseReference.child(userId).setValue(user);
-
-                    Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                    // Here you can add logic to automatically log in after registration
+                    // Save the user to Firestore
+                    firestore.collection("users").document(userId).set(user).addOnSuccessListener(aVoid -> {
+                        Toast.makeText(Register.this, "Registrado correctamente", Toast.LENGTH_SHORT).show();
+                         Intent intent = new Intent(Register.this, Login.class);
+                         startActivity(intent);
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(Register.this, "Error registrando usuario", Toast.LENGTH_SHORT).show();
+                    });
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle database errors
-                Toast.makeText(Register.this, "Error accessing database", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(Register.this, "Error accediendo a la base de datos", Toast.LENGTH_SHORT).show();
             }
         });
     }
