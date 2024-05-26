@@ -8,14 +8,13 @@
     android:orientation="vertical"
     >
 
-
     <TextView
         android:id="@+id/textLogin"
         android:layout_width="112dp"
         android:layout_height="26dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="120dp"
-        android:background="#04F80E"
+        android:background="@color/colorVerdeBrillante"
         android:text="INICIAR SESIÓN"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -27,7 +26,7 @@
         android:layout_width="163dp"
         android:layout_height="51dp"
         android:layout_marginBottom="64dp"
-        android:background="#04F80E"
+        android:background="@color/colorVerdeBrillante"
         android:text="Iniciar"
         android:textAlignment="center"
         android:textColor="#4A4444"
@@ -79,10 +78,10 @@
 
     <Button
         android:id="@+id/btnRegistrar"
-        android:layout_width="165dp"
-        android:layout_height="52dp"
+        android:layout_width="178dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="96dp"
-        android:backgroundTint="#04F80E"
+        android:backgroundTint="@color/spoti"
         android:text="Registrar"
         android:textColor="#4A4444"
         android:textColorHint="#5E605F"
@@ -100,7 +99,6 @@
         android:layout_marginBottom="132dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
-        android:drawableLeft=""
         android:ems="10"
         android:hint="contraseña"
         android:inputType="text"
@@ -121,5 +119,14 @@
         app:layout_constraintVertical_bias="0.141"
         app:srcCompat="@drawable/mosque" />
 
+    <CheckBox
+        android:id="@+id/checkBoxRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recordar credenciales"
+        android:checked="false"
+        app:layout_constraintBottom_toTopOf="@+id/btnInicio"
+        app:layout_constraintEnd_toEndOf="@+id/btnInicio"
+        app:layout_constraintStart_toStartOf="@+id/btnInicio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

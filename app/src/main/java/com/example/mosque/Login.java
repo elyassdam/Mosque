@@ -3,31 +3,38 @@ package com.example.mosque;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Login extends AppCompatActivity {
 
     private EditText editTextCorreo;
     private EditText editTextContraseña;
+    private CheckBox checkBoxRemember;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize Firestore
+        firestore = FirebaseFirestore.getInstance();
+
         editTextCorreo = findViewById(R.id.username);
         editTextContraseña = findViewById(R.id.password);
+        checkBoxRemember = findViewById(R.id.checkBoxRemember);
 
         Button btnIniciar = findViewById(R.id.btnInicio);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
@@ -36,13 +43,14 @@ public class Login extends AppCompatActivity {
                 String correo = editTextCorreo.getText().toString();
                 String contraseña = editTextContraseña.getText().toString();
 
-                if (esCorreoValido(correo) && esContraseñaValida(contraseña)) {
-                    usuarioRegistrado(correo, contraseña);
+                if (correo.isEmpty() || contraseña.isEmpty()) {
+                    Toast.makeText(Login.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Login.this, "Correo o contraseña inválidos", Toast.LENGTH_SHORT).show();
+                    usuarioRegistrado(correo, contraseña);
                 }
             }
         });
+
         Button btnRegistrar = findViewById(R.id.btnRegistrar);
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,28 +59,42 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-    private boolean esCorreoValido(String correo) {
-        return correo.contains("@");
-    }
+        // Verificar si hay credenciales guardadas
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+        String correoGuardado = sharedPreferences.getString("correo", "");
+        String contraseñaGuardada = sharedPreferences.getString("contraseña", "");
+        boolean rememberMeChecked = sharedPreferences.getBoolean("rememberMeChecked", false);
 
-    private boolean esContraseñaValida(String contraseña) {
-        return contraseña.length() >= 6;
+        editTextCorreo.setText(correoGuardado);
+        editTextContraseña.setText(contraseñaGuardada);
+        checkBoxRemember.setChecked(rememberMeChecked);
+
+        if (rememberMeChecked && !correoGuardado.isEmpty() && !contraseñaGuardada.isEmpty()) {
+            // Intentar iniciar sesión automáticamente
+            usuarioRegistrado(correoGuardado, contraseñaGuardada);
+        }
     }
 
     private void usuarioRegistrado(String correo, String contraseña) {
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
-
-        usersRef.orderByChild("email").equalTo(correo).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                        User usuario = userSnapshot.getValue(User.class);
+        firestore.collection("users").whereEqualTo("email", correo).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot querySnapshot = task.getResult();
+                if (!querySnapshot.isEmpty()) {
+                    for (DocumentSnapshot documentSnapshot : querySnapshot.getDocuments()) {
+                        User usuario = documentSnapshot.toObject(User.class);
                         if (usuario != null && usuario.getPassword().equals(contraseña)) {
                             // El usuario está registrado y la contraseña coincide
                             Toast.makeText(Login.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                            if (checkBoxRemember.isChecked()) {
+                                // Guardar credenciales si se seleccionó "Remember Me"
+                                SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("correo", correo);
+                                editor.putString("contraseña", contraseña);
+                                editor.putBoolean("rememberMeChecked", true);
+                                editor.apply();
+                            }
                             Intent intent = new Intent(Login.this, Home.class);
                             startActivity(intent);
                             finish();
@@ -85,12 +107,9 @@ public class Login extends AppCompatActivity {
                     // El usuario no está registrado
                     Toast.makeText(Login.this, "Usuario no registrado", Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            } else {
                 // Manejar el error
-                Toast.makeText(Login.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

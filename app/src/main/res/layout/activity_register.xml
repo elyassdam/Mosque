@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -10,129 +11,143 @@
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_width="232dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="168dp"
         android:text="REGISTRAR"
+        android:textColorLink="@color/spoti"
+        android:textCursorDrawable="@color/spoti"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="207dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="#8AFA8F"
         android:text="REGISTRAR NUEVO USUARIO"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="283dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="60dp"
+        android:layout_width="381dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="#8BF495"
         android:text="RELLENE LOS SIGUIENTES CAMPOS PARA COMPLETAR TU REGISTRO"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="271dp"
-        android:layout_height="54dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="72dp"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:hint="Nombre"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/dni"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/dni"
-        android:layout_width="271dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="64dp"
-        android:ems="10"
-        android:hint="DNI"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/datePickerButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.342"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintWidth_percent="0.8" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="68dp"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="@+id/phone"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintWidth_percent="0.8" />
 
     <Button
         android:id="@+id/datePickerButton"
         style="?android:spinnerStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="80dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:onClick="openDatePicker"
         android:text="FECHA DE NACIMIENTO"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/email"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:hint="Teléfono"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datePickerButton"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <EditText
+        android:id="@+id/dni"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:hint="DNI"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dni"
+        app:layout_constraintWidth_percent="0.8" />
 
     <EditText
         android:id="@+id/confirmPassword"
-        android:layout_width="280dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="76dp"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:hint="Confirma contraseña"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.348"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.067"
+        app:layout_constraintWidth_percent="0.8" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="271dp"
-        android:layout_height="54dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="60dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/confirmPassword"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="271dp"
-        android:layout_height="54dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:hint="Teléfono"
-        android:inputType="phone"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="232dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="112dp"
+        android:text="INICIAR SESIÓN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnRegister"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
