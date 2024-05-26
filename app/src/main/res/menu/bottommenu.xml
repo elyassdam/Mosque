@@ -11,18 +11,20 @@
     android:icon="@drawable/icsearch"
     />
     <item
+        android:id="@+id/salat"
+        android:title="SALAT"
+        android:icon="@drawable/icnmosque"
+        />
+    <item
     android:id="@+id/maps"
     android:title="MAPAS"
     android:icon="@drawable/icmaps"
     />
+
     <item
         android:id="@+id/pay"
         android:title="PAGAR"
         android:icon="@drawable/icpay"
         />
-    <item
-        android:id="@+id/salat"
-        android:title="SALAT"
-        android:icon="@drawable/icnmosque"
-        />
+
 </menu>

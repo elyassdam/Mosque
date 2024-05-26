@@ -19,7 +19,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
     private HomeFragment homeFragment;
     private SearchFragment searchFragment;
     private MapsFragment mapsFragment;
-    private PayFragment payFragment;
+
+     private PayFragment payFragment;
     private SalatFragment salatFragment;
     private WebView webView;
 
@@ -35,6 +36,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
         mapsFragment = new MapsFragment();
         payFragment = new PayFragment();
         salatFragment=new SalatFragment();
+
 
      //   setFragment(homeFragment); // Mostrar el fragmento de inicio por defecto
 
@@ -56,6 +58,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                         return true;
                     case R.id.salat:
                         setFragment(salatFragment);
+                        return true;
                     default:
                         return false;
                 }
@@ -66,5 +69,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
     private void setFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.framel, fragment).commit();
     }
+    private void createNotifications(){
+
+     }
 }
 

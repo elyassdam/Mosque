@@ -1,9 +1,14 @@
 package com.example.mosque;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,50 +20,52 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewProjects;
     private FloatingActionButton fab;
-    private ProjectAdapter projectAdapter;
-    private List<Project> projectList;
-    private boolean isAdmin = false; // Inicialmente no es admin
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        private String selectedAppointmentType = "";
 
-        // Initialize views
-        recyclerViewProjects = view.findViewById(R.id.recyclerViewProjects);
-        fab = view.findViewById(R.id.fab);
+        public HomeFragment() {
+            // Constructor público requerido
+        }
 
-        // Setup RecyclerView
-        recyclerViewProjects.setLayoutManager(new LinearLayoutManager(getContext()));
-        projectAdapter = new ProjectAdapter(getContext(), projectList);
-        recyclerViewProjects.setAdapter(projectAdapter);
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            // Inflar el diseño del fragmento
+            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Show or hide FAB based on isAdmin
-        if (isAdmin) {
-            fab.setVisibility(View.VISIBLE);
-            fab.setOnClickListener(new View.OnClickListener() {
+            // Configurar el OnClickListener para el botón de selección de tipo de cita
+            Button selectAppointmentTypeButton = rootView.findViewById(R.id.buttonSelectAppointmentType);
+            selectAppointmentTypeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // Mostrar el diálogo de selección de tipo de cita
+                    showAppointmentTypeDialog();
                 }
             });
-        } else {
-            fab.setVisibility(View.GONE);
+
+            return rootView;
         }
 
-        return view;
-    }
+        private void showAppointmentTypeDialog() {
+            // Crear un arreglo de opciones para el diálogo
+            final String[] appointmentTypes = {"Imam", "Administrador","Mezquita"};
 
-    // This method can be used to set the isAdmin status from outside the fragment
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
-    }
+            // Crear un diálogo de selección
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("Seleccione el tipo de cita");
+            builder.setItems(appointmentTypes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int position) {
+                    // Obtener el tipo de cita seleccionado por el usuario
+                    selectedAppointmentType = appointmentTypes[position];
+                    Toast.makeText(requireContext(), "Tipo de cita seleccionado: " + selectedAppointmentType, Toast.LENGTH_SHORT).show();
 
-    // This method can be used to set the project list from outside the fragment
-    public void setProjectList(List<Project> projectList) {
-        this.projectList = projectList;
-        if (projectAdapter != null) {
-            projectAdapter.updateProjects(projectList);
+                    // Después de seleccionar el tipo de cita, se puede proceder a seleccionar la fecha aquí si se desea
+                    // showDatePickerDialog();
+                }
+            });
+
+            // Mostrar el diálogo
+            builder.show();
         }
     }
-}
