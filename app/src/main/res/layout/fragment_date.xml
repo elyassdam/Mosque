@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <Spinner
+        android:id="@+id/spinnerCita"
+        android:layout_width="142dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="129dp"
+        android:entries="@array/dateTypes" />
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="324dp"
+        android:layout_height="396dp"
+        android:layout_below="@id/spinnerCita"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="63dp" />
+
+    <Button
+        android:id="@+id/btnConfirmarCita"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_below="@id/datePicker"
+        android:layout_alignEnd="@+id/datePicker"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="92dp"
+        android:text="Confirmar Cita" />
+
+    <TextView
+        android:id="@+id/tvSelectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnConfirmarCita"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+</RelativeLayout>

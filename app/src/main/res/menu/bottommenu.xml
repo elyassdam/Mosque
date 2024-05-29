@@ -22,9 +22,9 @@
     />
 
     <item
-        android:id="@+id/pay"
-        android:title="PAGAR"
-        android:icon="@drawable/icpay"
+        android:id="@+id/date"
+        android:title="CITAS"
+        android:icon="@drawable/iccalendar"
         />
 
 </menu>

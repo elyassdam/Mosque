@@ -2,7 +2,6 @@ package com.example.mosque;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
@@ -19,8 +18,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
     private HomeFragment homeFragment;
     private SearchFragment searchFragment;
     private MapsFragment mapsFragment;
-
-     private PayFragment payFragment;
+private DateFragment dateFragment;
+     private DateFragment payFragment;
     private SalatFragment salatFragment;
     private WebView webView;
 
@@ -34,7 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
         homeFragment = new HomeFragment();
         searchFragment = new SearchFragment();
         mapsFragment = new MapsFragment();
-        payFragment = new PayFragment();
+        dateFragment = new DateFragment();
         salatFragment=new SalatFragment();
 
 
@@ -53,8 +52,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                     case R.id.maps:
                         setFragment(mapsFragment);
                         return true;
-                    case R.id.pay:
-                        setFragment(payFragment);
+                    case R.id.date:
+                        setFragment(dateFragment);
                         return true;
                     case R.id.salat:
                         setFragment(salatFragment);

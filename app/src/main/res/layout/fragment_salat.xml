@@ -10,6 +10,9 @@
 
 
     <!-- Imagen de fondo curva -->
+
+    <!-- Ciudad-->
+
     <ImageView
         android:id="@+id/imageViewBackground"
         android:layout_width="match_parent"
@@ -18,25 +21,30 @@
         android:src="@drawable/mosquevillalba" />
 
     <TextView
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewCity"
+        android:layout_marginBottom="91dp" />
+
+    <TextView
         android:id="@+id/textViewCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewBackground"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="84dp"
         android:text="Madrid, Spain"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <!-- Tabla de horarios de oración -->
     <LinearLayout
         android:id="@+id/linearLayoutTimings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewCity"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corner_background"
@@ -170,14 +178,14 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Texto de tiempo restante -->
     <TextView
         android:id="@+id/textViewTimeRemaining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/linearLayoutTimings"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="43dp"
         android:text="Tiempo restante para Dhuhr: 05:51:34"
         android:textColor="@color/black"
         android:textSize="16sp" />
