@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
     private HomeFragment homeFragment;
     private SearchFragment searchFragment;
     private MapsFragment mapsFragment;
+    private  ArabicClassesFragment arabicClassesFragment;
 private DateFragment dateFragment;
      private DateFragment payFragment;
     private SalatFragment salatFragment;
@@ -35,6 +36,7 @@ private DateFragment dateFragment;
         mapsFragment = new MapsFragment();
         dateFragment = new DateFragment();
         salatFragment=new SalatFragment();
+        arabicClassesFragment=new ArabicClassesFragment();
 
 
      //   setFragment(homeFragment); // Mostrar el fragmento de inicio por defecto
@@ -44,7 +46,7 @@ private DateFragment dateFragment;
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        setFragment(homeFragment);
+                        setFragment(arabicClassesFragment);
                         return true;
                     case R.id.search:
                         setFragment(searchFragment);

@@ -23,12 +23,12 @@
 
     <Button
         android:id="@+id/btnConfirmarCita"
-        android:layout_width="wrap_content"
-        android:layout_height="63dp"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/datePicker"
         android:layout_alignEnd="@+id/datePicker"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="92dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="53dp"
         android:text="Confirmar Cita" />
 
     <TextView

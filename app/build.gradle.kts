@@ -65,7 +65,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.activity:activity:1.9.0")
-    implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.android.gms:play-services-wallet:19.1.0")
     implementation("com.google.android.gms:play-services-pal:20.2.0")
     implementation("androidx.core:core-i18n:1.0.0-alpha01")
@@ -76,12 +75,17 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest" )
     implementation("com.google.android.material:material:1.12.0")
+    //Firebase
+    implementation("com.google.firebase:firebase-database:21.0.0")
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation ("com.google.firebase:firebase-firestore:24.0.2")
+    implementation ("com.google.firebase:firebase-database:20.0.4")
     implementation ("com.google.firebase:firebase-firestore:24.1.0")
     implementation("androidx.compose.material3:material3:1.2.1")
             //salat
             implementation ("com.squareup.retrofit2:retrofit:2.9.0")
             implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }

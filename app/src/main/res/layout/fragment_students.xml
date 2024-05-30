@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArabicClassesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clases de Árabe para Niños"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/textViewUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Usuario: "
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/editTextStudentName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Nombre del Alumno" />
+
+        <EditText
+            android:id="@+id/editTextStudentSurname"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Apellidos del Alumno" />
+
+        <EditText
+            android:id="@+id/editTextStudentDNI"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="DNI del Alumno" />
+
+        <EditText
+            android:id="@+id/editTextStudentBirthdate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Fecha de Nacimiento (dd/MM/yyyy)" />
+
+        <EditText
+            android:id="@+id/editTextStudentGender"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Género (Chico/Chica)" />
+
+        <EditText
+            android:id="@+id/editTextParent1DNI"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="DNI del Padre" />
+
+        <EditText
+            android:id="@+id/editTextParent1Name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Nombre del Padre" />
+
+        <EditText
+            android:id="@+id/editTextParent1Surname"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Apellidos del Padre" />
+
+        <EditText
+            android:id="@+id/editTextParent2DNI"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="DNI de la Madre" />
+
+        <EditText
+            android:id="@+id/editTextParent2Name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Nombre de la Madre" />
+
+        <EditText
+            android:id="@+id/editTextParent2Surname"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Apellidos de la Madre" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Dirección" />
+
+        <EditText
+            android:id="@+id/editTextBankAccount"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Cuenta Bancaria" />
+
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Inscribirse"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>
