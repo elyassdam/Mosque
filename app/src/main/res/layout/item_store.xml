@@ -45,5 +45,13 @@
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
             tools:srcCompat="@drawable/icshop" />
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackground"
+           />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
