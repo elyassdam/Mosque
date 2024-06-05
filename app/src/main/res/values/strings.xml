@@ -1,18 +1,22 @@
 <resources>
-    <string name="app_name">Mosque</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-
+    <string name="app_name" translatable="false">Mosque</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+    <string name="prompt_email" translatable="false">Email</string>
+    <string name="prompt_password" translatable="false">Password</string>
+    <string name="action_sign_in" translatable="false">Sign in or register</string>
+    <string name="action_sign_in_short" translatable="false">Sign in</string>
+    <string name="welcome" translatable="false">"Welcome !"</string>
+    <string name="invalid_username" translatable="false">Not a valid username</string>
+    <string name="invalid_password" translatable="false">Password must be >5 characters</string>
+    <string name="login_failed" translatable="false">"Login failed"</string>
+    <string-array name="languages">
+        <item>English</item>
+        <item>Español</item>
+        <item>عربي</item>
+    </string-array>
     <!-- Checkout activity -->
-    <string name="title_activity_checkout">CheckoutActivity</string>
-    <string name="checkout_item_description">Description</string>
+    <string name="title_activity_checkout" translatable="false">CheckoutActivity</string>
+    <string name="checkout_item_description" translatable="false">Description</string>
     <string name="googlepay_status_unavailable" translatable="false">Unfortunately, Google Pay is
         not available on this phone.
     </string>
@@ -20,12 +24,13 @@
         %s!
     </string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     <string-array name="dateTypes">
         <item>Imam</item>
         <item>Administrador</item>
         <item>Mezquita</item>
     </string-array>
+
 
 </resources>

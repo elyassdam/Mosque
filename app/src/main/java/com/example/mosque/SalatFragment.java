@@ -1,10 +1,12 @@
 package com.example.mosque;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -116,5 +118,18 @@ public class SalatFragment extends Fragment {
         } else {
             textViewTimeRemaining.setText("No hay una próxima salat");
         }
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button buttonOpenQiblaCompass = view.findViewById(R.id.buttonOpenQiblaCompass);
+        buttonOpenQiblaCompass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QiblaCompassActivity.class); // Reemplaza con el nombre de tu actividad de la brújula de la quibla
+                startActivity(intent);
+            }
+        });
     }
 }

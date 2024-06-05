@@ -1,5 +1,6 @@
 package com.example.mosque;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -27,7 +28,10 @@ private DateFragment dateFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         setContentView(R.layout.activity_home);
+
         bottomNavigationView = findViewById(R.id.bottom);
         frameLayout = findViewById(R.id.framel);
 
@@ -39,7 +43,7 @@ private DateFragment dateFragment;
         arabicClassesFragment=new ArabicClassesFragment();
 
 
-     //   setFragment(homeFragment); // Mostrar el fragmento de inicio por defecto
+        setFragment(arabicClassesFragment); // Mostr ar elfragmento de inicio por defecto
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

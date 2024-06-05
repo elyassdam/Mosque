@@ -1,132 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoimagenislam"
-    android:orientation="vertical"
-    >
+    android:background="@drawable/fondoimagenislam">
 
     <TextView
         android:id="@+id/textLogin"
-        android:layout_width="112dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="111dp"
         android:background="@color/colorVerdeBrillante"
         android:text="INICIAR SESIÓN"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btnInicio"
-        android:layout_width="163dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="64dp"
-        android:background="@color/colorVerdeBrillante"
-        android:text="Iniciar"
-        android:textAlignment="center"
-        android:textColor="#4A4444"
-        app:layout_constraintBottom_toBottomOf="@+id/btnRegistrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="344dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/username"
-        app:layout_constraintHorizontal_bias="0.611"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/emailicon" />
+        android:id="@+id/imageView7"
+        android:layout_width="402dp"
+        android:layout_height="222dp"
+        android:layout_below="@id/textLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="9dp"
+        app:srcCompat="@drawable/mosque" />
+
+    <Spinner
+        android:id="@+id/spinnerLanguage"
+        android:layout_width="226dp"
+        android:layout_height="53dp"
+        android:layout_below="@id/imageView7"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="92.5dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="92.5dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="238dp"
         android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="332dp"
-        android:layout_marginEnd="32dp"
+        android:layout_below="@id/spinnerLanguage"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="50dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="-@usuario"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.633"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="320dp"
-        android:layout_marginBottom="288dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/img" />
-
-    <Button
-        android:id="@+id/btnRegistrar"
-        android:layout_width="178dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="96dp"
-        android:backgroundTint="@color/spoti"
-        android:text="Registrar"
-        android:textColor="#4A4444"
-        android:textColorHint="#5E605F"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="238dp"
         android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="132dp"
+        android:layout_below="@id/username"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
         android:background="@color/white"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="contraseña"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegistrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.633"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="392dp"
-        android:layout_height="199dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.141"
-        app:srcCompat="@drawable/mosque" />
+        android:inputType="textPassword" />
 
     <CheckBox
         android:id="@+id/checkBoxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recordar credenciales"
-        android:checked="false"
-        app:layout_constraintBottom_toTopOf="@+id/btnInicio"
-        app:layout_constraintEnd_toEndOf="@+id/btnInicio"
-        app:layout_constraintStart_toStartOf="@+id/btnInicio" />
+        android:layout_below="@id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Recordar credenciales" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnInicio"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/checkBoxRemember"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="90.5dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="90.5dp"
+        android:background="@color/colorVerdeBrillante"
+        android:text="Iniciar"
+        android:textColor="#231C1C" />
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="230dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/btnInicio"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="90.5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="90.5dp"
+        android:backgroundTint="@color/spoti"
+        android:text="Registrar" />
+
+    <ImageView
+        android:id="@+id/emailicon"
+        android:layout_width="48dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/username"
+        android:layout_marginTop="-42dp"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/username"
+        app:srcCompat="@drawable/emailicon" />
+
+    <ImageView
+        android:id="@+id/passwordicon"
+        android:layout_width="48dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/username"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/username"
+        app:srcCompat="@drawable/img" />
+
+</RelativeLayout>

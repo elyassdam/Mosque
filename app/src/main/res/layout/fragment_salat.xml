@@ -5,13 +5,11 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:backgroundTint="@color/white"
-    tools:context=".SalatFragment"
-     >
-
+    tools:context=".SalatFragment">
 
     <!-- Imagen de fondo curva -->
 
-    <!-- Ciudad-->
+    <!-- Ciudad -->
 
     <ImageView
         android:id="@+id/imageViewBackground"
@@ -32,11 +30,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewBackground"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="14dp"
         android:text="Madrid, Spain"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <!-- Botón para abrir la brújula de la quibla -->
 
     <LinearLayout
         android:id="@+id/linearLayoutTimings"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewCity"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="57dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corner_background"
@@ -182,11 +182,28 @@
         android:id="@+id/textViewTimeRemaining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linearLayoutTimings"
+        android:layout_below="@+id/textViewCity"
+        android:layout_alignStart="@+id/textViewCity"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="83dp"
         android:text="Tiempo restante para Dhuhr: 05:51:34"
         android:textColor="@color/black"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonOpenQiblaCompass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTimeRemaining"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="138dp"
+        android:backgroundTint="@color/spoti"
+        android:padding="12dp"
+        android:text="Abrir Qibla"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.example.mosque;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +22,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ArabicClassesFragment extends Fragment {
 
@@ -36,7 +42,6 @@ public class ArabicClassesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_students, container, false);
-
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -65,11 +70,54 @@ public class ArabicClassesFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitStudentData();
+                if (validateInputs()) {
+                    submitStudentData();
+                }
             }
         });
 
         return view;
+    }
+
+    private boolean validateInputs() {
+        String studentDNI = editTextStudentDNI.getText().toString().trim();
+        String studentBirthdate = editTextStudentBirthdate.getText().toString().trim();
+        String parent1DNI = editTextParent1DNI.getText().toString().trim();
+        String parent2DNI = editTextParent2DNI.getText().toString().trim();
+
+        // Validación de DNI
+        String dniPattern = "\\d{8}[A-Za-z]";
+        if (!Pattern.matches(dniPattern, studentDNI)) {
+            editTextStudentDNI.setError("DNI inválido. Debe tener 8 números y una letra.");
+            return false;
+        }
+        if (!Pattern.matches(dniPattern, parent1DNI)) {
+            editTextParent1DNI.setError("DNI inválido. Debe tener 8 números y una letra.");
+            return false;
+        }
+        if (!Pattern.matches(dniPattern, parent2DNI)) {
+            editTextParent2DNI.setError("DNI inválido. Debe tener 8 números y una letra.");
+            return false;
+        }
+
+        // Validación de fecha de nacimiento
+        if (!isValidDate(studentBirthdate)) {
+            editTextStudentBirthdate.setError("Fecha de nacimiento inválida. Use el formato dd/MM/yyyy.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false);
+        try {
+            Date date = sdf.parse(dateStr);
+            return date != null;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     private void submitStudentData() {
@@ -123,4 +171,3 @@ public class ArabicClassesFragment extends Fragment {
                 });
     }
 }
-

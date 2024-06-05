@@ -6,16 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Locale;
 
 public class Login extends AppCompatActivity {
 
@@ -23,11 +32,13 @@ public class Login extends AppCompatActivity {
     private EditText editTextContraseña;
     private CheckBox checkBoxRemember;
     private FirebaseFirestore firestore;
+    private Spinner spinnerLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance();
@@ -35,7 +46,33 @@ public class Login extends AppCompatActivity {
         editTextCorreo = findViewById(R.id.username);
         editTextContraseña = findViewById(R.id.password);
         checkBoxRemember = findViewById(R.id.checkBoxRemember);
+        spinnerLanguage = findViewById(R.id.spinnerLanguage);
 
+       /* ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.languages, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLanguage.setAdapter(adapter);
+
+        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String language = "en"; // default to English
+                switch (position) {
+                    case 1:
+                        language = "es"; // Spanish
+                        break;
+                    case 2:
+                        language = "ar"; // Arabic
+                        break;
+                }
+                setLocale(language);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+*/
         Button btnIniciar = findViewById(R.id.btnInicio);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +107,7 @@ public class Login extends AppCompatActivity {
         editTextContraseña.setText(contraseñaGuardada);
         checkBoxRemember.setChecked(rememberMeChecked);
 
-        if (rememberMeChecked && !correoGuardado.isEmpty() && !contraseñaGuardada.isEmpty()) {
+       if (rememberMeChecked && !correoGuardado.isEmpty() && !contraseñaGuardada.isEmpty()) {
             // Intentar iniciar sesión automáticamente
             usuarioRegistrado(correoGuardado, contraseñaGuardada);
         }
@@ -112,5 +149,19 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.setLocale(myLocale);
+        res.updateConfiguration(conf, dm);
+
+        // Reload current activity to apply the language change
+        Intent refresh = new Intent(this, Login.class);
+        startActivity(refresh);
+        finish();
     }
 }
