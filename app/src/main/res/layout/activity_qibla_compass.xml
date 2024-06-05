@@ -26,13 +26,4 @@
         android:layout_marginBottom="-117dp"
         android:text="ATRÁS" />
 
-    <ImageView
-        android:id="@+id/indicatorpoint"
-        android:layout_width="134dp"
-        android:layout_height="82dp"
-        android:layout_alignEnd="@+id/compassImageView"
-        android:layout_alignBottom="@+id/compassImageView"
-        android:layout_marginEnd="-24dp"
-        android:layout_marginBottom="375dp"
-        app:srcCompat="@drawable/indicatorpoint" />
 </RelativeLayout>

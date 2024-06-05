@@ -127,7 +127,7 @@ public class SalatFragment extends Fragment {
         buttonOpenQiblaCompass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QiblaCompassActivity.class); // Reemplaza con el nombre de tu actividad de la brújula de la quibla
+                Intent intent = new Intent(getActivity(), QiblaCompassActivity.class);
                 startActivity(intent);
             }
         });

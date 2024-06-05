@@ -3,22 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp">
 
-    <TextView
-        android:id="@+id/textViewTituloProyecto"
+    <ImageView
+        android:id="@+id/imageViewFoto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"/>
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icninfo"/>
 
     <TextView
-        android:id="@+id/textViewDescripcionProyecto"
+        android:id="@+id/textViewDescripcionFoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:text="Descripción de la foto"/>
 
 </LinearLayout>

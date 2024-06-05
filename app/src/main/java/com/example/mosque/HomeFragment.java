@@ -1,115 +1,81 @@
 package com.example.mosque;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
-    private Button btnSelectDate;
-    private Spinner spinnerAppointmentType;
-    private String selectedAppointmentType = "Imam";
+    private TextView textViewAboutUs;
+    private Button btnAddContent;
+    private HadithApiService apiService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        btnSelectDate = rootView.findViewById(R.id.btnSelectDate);
-        spinnerAppointmentType = rootView.findViewById(R.id.spinner);
+        textViewAboutUs = view.findViewById(R.id.textViewAboutUs);
+        btnAddContent = view.findViewById(R.id.btnAddContent);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
-                R.array.dateTypes, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerAppointmentType.setAdapter(adapter);
+        // Configuración de Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.thesunnah.com/v1/hadiths/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        spinnerAppointmentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedAppointmentType = parent.getItemAtPosition(position).toString();
-            }
+        apiService = retrofit.create(HadithApiService.class);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                selectedAppointmentType = "Imam"; // Valor por defecto
-            }
-        });
+        // Obtener y mostrar el Hadith del día
+        getDailyHadith();
 
-        btnSelectDate.setOnClickListener(new View.OnClickListener() {
+        // Manejar el botón para añadir contenido
+        btnAddContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog();
+                // Aquí puedes agregar el código para abrir la actividad de añadir contenido
+                Toast.makeText(getContext(), "Add Content button clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
-        return rootView;
+        return view;
     }
 
-    private void showDatePickerDialog() {
-        final Calendar calendar = Calendar.getInstance();
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+    private void getDailyHadith() {
+        // Realizar la solicitud a la API
+        apiService.getDailyHadith().enqueue(new Callback<HadithResponse>() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                Calendar selectedDate = Calendar.getInstance();
-                selectedDate.set(year, month, dayOfMonth);
-
-                if (isDateAvailable(selectedDate)) {
-                    Toast.makeText(requireContext(), "Fecha seleccionada: " + dayOfMonth + "/" + (month + 1) + "/" + year, Toast.LENGTH_SHORT).show();
-                    // Aquí puedes manejar la fecha seleccionada
+            public void onResponse(@NonNull Call<HadithResponse> call, @NonNull Response<HadithResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Hadith hadith = response.body().getData();
+                    if (hadith != null) {
+                        // Mostrar el Hadith del día
+                        textViewAboutUs.setText(hadith.getBody());
+                    } else {
+                        textViewAboutUs.setText("No se encontró un Hadith para hoy");
+                    }
                 } else {
-                    Toast.makeText(requireContext(), "Fecha no disponible, por favor seleccione otra fecha.", Toast.LENGTH_SHORT).show();
+                    textViewAboutUs.setText("No se pudo obtener el Hadith del día");
                 }
             }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000); // No permitir seleccionar fechas pasadas
-        datePickerDialog.show();
-    }
-
-    private boolean isDateAvailable(Calendar date) {
-        int dayOfWeek = date.get(Calendar.DAY_OF_WEEK);
-
-        switch (selectedAppointmentType) {
-            case "Imam":
-                return dayOfWeek == Calendar.TUESDAY || dayOfWeek == Calendar.THURSDAY;
-            case "Administrador":
-                return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
-            case "Mezquita":
-                return isFridayAvailable(date);
-            default:
-                return false;
-        }
-    }
-
-    private boolean isFridayAvailable(Calendar date) {
-        if (date.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY) {
-            return false;
-        }
-
-        Calendar firstFriday = getFirstFridayOfMonth(date);
-        Calendar secondFriday = (Calendar) firstFriday.clone();
-        secondFriday.add(Calendar.WEEK_OF_YEAR, 1);
-
-        return date.equals(firstFriday) || date.equals(secondFriday);
-    }
-
-    private Calendar getFirstFridayOfMonth(Calendar date) {
-        Calendar firstDayOfMonth = Calendar.getInstance();
-        firstDayOfMonth.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), 1);
-
-        int dayOfWeek = firstDayOfMonth.get(Calendar.DAY_OF_WEEK);
-        int offset = (Calendar.FRIDAY - dayOfWeek + 7) % 7;
-        firstDayOfMonth.add(Calendar.DAY_OF_MONTH, offset);
-
-        return firstDayOfMonth;
+            @Override
+            public void onFailure(@NonNull Call<HadithResponse> call, @NonNull Throwable t) {
+                textViewAboutUs.setText("Error: " + t.getMessage());
+            }
+        });
     }
 }

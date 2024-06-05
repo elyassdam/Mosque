@@ -28,14 +28,9 @@
             />
         <activity
             android:name=".Home"
-            android:exported="true" />
-        <activity
-            android:name=".Mainactivity"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-
-
-
+            android:exported="true"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".Register"
             android:exported="true"

@@ -17,6 +17,7 @@ public class Store {
         this.imageUrl = imageUrl; // Asignar la URL de la imagen
     }
 
+
     // Getters y setters
     public String getName() {
         return name;

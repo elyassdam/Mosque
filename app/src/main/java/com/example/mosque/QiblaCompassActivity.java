@@ -30,8 +30,6 @@ public class QiblaCompassActivity extends AppCompatActivity implements SensorEve
         setContentView(R.layout.activity_qibla_compass);
 
         compassImageView = findViewById(R.id.compassImageView);
-        indicatorPoint = findViewById(R.id.indicatorpoint); // Obtener referencia del punto indicador
-
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
@@ -46,7 +44,7 @@ public class QiblaCompassActivity extends AppCompatActivity implements SensorEve
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(QiblaCompassActivity.this, SalatFragment.class);
+                Intent intent = new Intent(QiblaCompassActivity.this, Home.class);
                 startActivity(intent);
 
             }
@@ -87,8 +85,6 @@ public class QiblaCompassActivity extends AppCompatActivity implements SensorEve
 
                 float qiblaDirection = (float) ((qiblaAngle - azimuth + 360) % 360);
                 compassImageView.setRotation(qiblaDirection);
-                indicatorPoint.setRotation(qiblaDirection);
-                indicatorPoint.setVisibility(View.VISIBLE);
             }
         }
     }

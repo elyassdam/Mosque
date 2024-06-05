@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,6 +65,10 @@ public class MapsFragment extends Fragment {
                 showAddStoreDialog();
             }
         });
+
+        // Agregar soporte para deslizar para eliminar
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback());
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return view;
     }
@@ -146,8 +151,7 @@ public class MapsFragment extends Fragment {
                         @Override
                         public void onSuccess(Uri uri) {
                             String imageUrl = uri.toString();
-                            saveStoreToFirestore(new Store(name, address, type, imageUrl));
-                            dialog.dismiss();
+                            saveStoreToFirestore(new Store(name, address, type, imageUrl), dialog);
                         }
                     });
                 }
@@ -159,24 +163,69 @@ public class MapsFragment extends Fragment {
             });
         } else {
             // Si no se seleccionó una imagen, guarda la tienda sin imagen
-            saveStoreToFirestore(new Store(name, address, type, null));
-            dialog.dismiss();
-
+            saveStoreToFirestore(new Store(name, address, type, null), dialog);
         }
     }
-            private void saveStoreToFirestore(Store store) {
-                db.collection("stores").add(store).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+    private void saveStoreToFirestore(Store store, AlertDialog dialog) {
+        db.collection("stores").add(store).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                storeList.add(store);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Tienda añadida exitosamente", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Error al añadir la tienda", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Implementación de la clase SwipeToDeleteCallback
+    private class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+        SwipeToDeleteCallback() {
+            super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            deleteStoreFromFirestore(position);
+        }
+    }
+
+    private void deleteStoreFromFirestore(int position) {
+        Store store = storeList.get(position);
+        String storeId = store.getAddress(); // Suponiendo que tienes un identificador único para cada tienda en tu modelo de datos
+        // Elimina el documento de la colección "stores" en Firestore
+        db.collection("stores").document(storeId)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        storeList.add(store);
-                        adapter.notifyDataSetChanged();
-                        Toast.makeText(getContext(), "Tienda añadida exitosamente", Toast.LENGTH_SHORT).show();
+                    public void onSuccess(Void aVoid) {
+                        // Eliminación exitosa, también elimina el elemento de la lista localmente
+                        storeList.remove(position);
+                        adapter.notifyItemRemoved(position);
+                        Toast.makeText(getContext(), "Tienda eliminada correctamente", Toast.LENGTH_SHORT).show();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
+                })
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Error al añadir la tienda", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Error al eliminar la tienda", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
     }
+
+    // Adapter sigue igual
+
+    // Otros métodos y clases de MapsFragment
+}

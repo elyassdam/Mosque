@@ -16,7 +16,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
     private List<Project> projectList;
     private Context context;
 
-    public ProjectAdapter(Context context, List<Project> projectList) {
+    public ProjectAdapter(List<Project> projectList) {
         this.context = context;
         this.projectList = projectList;
     }
@@ -31,7 +31,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
     @Override
     public void onBindViewHolder(@NonNull ProjectViewHolder holder, int position) {
         Project project = projectList.get(position);
-        holder.textViewProjectTitle.setText(project.getTitle());
+        holder.textViewProjectTitle.setText(project.getName());
         holder.textViewProjectDescription.setText(project.getDescription());
     }
 
@@ -50,8 +50,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewProjectTitle = itemView.findViewById(R.id.textViewProjectTitle);
-            textViewProjectDescription = itemView.findViewById(R.id.textViewProjectDescription);
+            textViewProjectTitle = itemView.findViewById(R.id.name);
+            textViewProjectDescription = itemView.findViewById(R.id.textViewDescripcionProyecto);
         }
 
     }

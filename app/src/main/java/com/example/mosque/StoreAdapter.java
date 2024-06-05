@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -17,9 +16,11 @@ import java.util.List;
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHolder> {
 
     private List<Store> storeList;
+    private OnDeleteClickListener onDeleteClickListener;
 
     public StoreAdapter(List<Store> storeList) {
         this.storeList = storeList;
+        this.onDeleteClickListener = onDeleteClickListener;
     }
 
     @NonNull
@@ -44,6 +45,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
 
         TextView textViewName, textViewAddress, textViewType;
         ImageView imageView;
+        View deleteButton;
 
         public StoreViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,6 +53,17 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
             textViewAddress = itemView.findViewById(R.id.textViewAddress);
             textViewType = itemView.findViewById(R.id.textViewType);
             imageView = itemView.findViewById(R.id.imageView);
+            deleteButton = itemView.findViewById(R.id.btnDelete);
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        onDeleteClickListener.onDeleteClick(position);
+                    }
+                }
+            });
         }
 
         public void bind(Store store) {
@@ -58,9 +71,12 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
             textViewAddress.setText(store.getAddress());
             textViewType.setText(store.getType());
             if (store.getImageUrl() != null) {
-                // Cargar imagen usando Glide
                 Glide.with(imageView.getContext()).load(store.getImageUrl()).into(imageView);
             }
         }
+    }
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(int position);
     }
 }

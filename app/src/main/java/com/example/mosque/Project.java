@@ -1,31 +1,28 @@
 package com.example.mosque;
 
+// Proyecto.java
 public class Project {
-    private String title;
+    private String name;
     private String description;
 
-    public Project() {
-        // Constructor vacío necesario para Firebase
-    }
-
-    public Project(String title, String description) {
-        this.title = title;
+    public Project(String name, String description) {
+        this.name = name;
         this.description = description;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setNombre(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescripcion(String description) {
         this.description = description;
     }
 }

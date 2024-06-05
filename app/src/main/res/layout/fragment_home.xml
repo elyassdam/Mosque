@@ -1,21 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnSelectDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Seleccionar Fecha" />
-
-    <Spinner
-        android:id="@+id/spinner"
+    <!-- News -->
+    <TextView
+        android:id="@+id/textViewNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnSelectDate"
-        android:layout_marginBottom="79dp" />
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="NOTICIAS"
+        android:textSize="24sp" />
 
-</RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <!-- Photos -->
+    <TextView
+        android:id="@+id/textViewPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="FOTOS"
+        android:textSize="24sp" />
+
+    <GridView
+        android:id="@+id/gridViewPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:verticalSpacing="8dp"
+        android:horizontalSpacing="8dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <!-- Future Projects -->
+    <TextView
+        android:id="@+id/textViewProjects"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="FUTUROS PROYECTOS"
+        android:textSize="24sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProjects"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <!-- About Us -->
+    <TextView
+        android:id="@+id/textViewAboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="About Us"
+        android:textSize="24sp" />
+
+    <!-- Botón para añadir contenido -->
+    <Button
+        android:id="@+id/btnAddContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="AÑADIR CONTENIDO" />
+
+</LinearLayout>
