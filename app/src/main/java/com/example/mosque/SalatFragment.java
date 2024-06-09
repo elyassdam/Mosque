@@ -32,7 +32,7 @@ public class SalatFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_salat, container, false);
 
         initializeTextViews(view);
-        getSalatTimings("Collado Villalba", "Madrid", "Spain", 4);
+        getSalatTimings("Collado Villalba", "Madrid", "Spain", 3);
 
         return view;
     }
