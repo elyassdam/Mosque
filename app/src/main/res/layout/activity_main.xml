@@ -14,7 +14,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="111dp"
-        android:background="@color/colorVerdeBrillante"
+        android:background="@color/spoti"
         android:text="INICIAR SESIÓN"
         android:textAlignment="center"
         android:textColor="@android:color/black"

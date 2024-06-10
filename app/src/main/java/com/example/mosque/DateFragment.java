@@ -87,7 +87,7 @@ public class DateFragment extends Fragment {
             tvSelectedDate.setText("Cita seleccionada: " + date);
 
             // Guarda la cita en Firestore
-            String userName = "Nombre de usuario"; // Aquí debes obtener el nombre de usuario actual
+            String userName = User.class.getName().toString(); // Aquí debes obtener el nombre de usuario actual
             Cita cita = new Cita(userName, date, selectedCitaType);
             firestore.collection("citas").add(cita)
                     .addOnSuccessListener(documentReference -> Toast.makeText(getContext(), "Cita confirmada", Toast.LENGTH_SHORT).show())

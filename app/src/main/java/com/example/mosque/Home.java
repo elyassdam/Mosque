@@ -43,14 +43,14 @@ private DateFragment dateFragment;
         arabicClassesFragment=new ArabicClassesFragment();
 
 
-        setFragment(arabicClassesFragment); // Mostr ar elfragmento de inicio por defecto
+        setFragment(homeFragment); // Mostr ar elfragmento de inicio por defecto
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        setFragment(arabicClassesFragment);
+                        setFragment(homeFragment);
                         return true;
                     case R.id.search:
                         setFragment(searchFragment);

@@ -1,79 +1,49 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <!-- News -->
-    <TextView
-        android:id="@+id/textViewNews"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="NOTICIAS"
-        android:textSize="24sp" />
+        android:orientation="vertical"
+        android:id="@+id/fragment_container"
+        android:padding="16dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewNews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        <Button
+            android:id="@+id/addButtonNews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir Noticia" />
 
-    <!-- Photos -->
-    <TextView
-        android:id="@+id/textViewPhotos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="FOTOS"
-        android:textSize="24sp" />
+        <Button
+            android:id="@+id/addButtonPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir Foto" />
 
-    <GridView
-        android:id="@+id/gridViewPhotos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:verticalSpacing="8dp"
-        android:horizontalSpacing="8dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:padding="8dp" />
+        <Button
+            android:id="@+id/addButtonProject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir Proyecto" />
 
-    <!-- Future Projects -->
-    <TextView
-        android:id="@+id/textViewProjects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="FUTUROS PROYECTOS"
-        android:textSize="24sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProjects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        <Button
+            android:id="@+id/buttonViewStudents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inscribir Estudiantes" />
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerrar Sesión" />
 
-    <!-- About Us -->
-    <TextView
-        android:id="@+id/textViewAboutUs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="About Us"
-        android:textSize="24sp" />
-
-    <!-- Botón para añadir contenido -->
-    <Button
-        android:id="@+id/btnAddContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="AÑADIR CONTENIDO" />
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

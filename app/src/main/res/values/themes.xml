@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorVerdeBrillante</item>
+        <item name="colorPrimary">@color/spoti</item>
         <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
-        <item name="colorAccent">@color/colorVerdeBrillante</item> <!-- Aquí defines el colorAccent -->
+        <item name="colorAccent">@color/spoti</item> <!-- Aquí defines el colorAccent -->
     </style></resources>
