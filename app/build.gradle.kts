@@ -81,6 +81,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.1.0")
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation ("com.google.firebase:firebase-storage:19.2.2")
+    implementation ("org.mindrot:jbcrypt:0.4")
 
 
     // Retrofit

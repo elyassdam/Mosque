@@ -59,14 +59,13 @@ public class Register extends AppCompatActivity {
         editTextConfirmPassword = findViewById(R.id.confirmPassword);
         editTextDni = findViewById(R.id.dni);
         btnRegister = findViewById(R.id.btnRegister);
-        btnBackLogin=findViewById(R.id.btnBack);
+        btnBackLogin = findViewById(R.id.btnBack);
         btnBackLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
                 Toast.makeText(Register.this, "Cambiando a Inicio", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -159,13 +158,14 @@ public class Register extends AppCompatActivity {
                 } else {
                     // The email is not registered, create a new user
                     String userId = firestore.collection("users").document().getId(); // Generate a unique ID for the user
-                    User user = new User(userId, name, dni, email, phone, dateOfBirth, password);
+                    String hashedPassword = PasswordHasher.hashPassword(password);
+                    User user = new User(userId, name, dni, email, phone, dateOfBirth, hashedPassword);
 
                     // Save the user to Firestore
                     firestore.collection("users").document(userId).set(user).addOnSuccessListener(aVoid -> {
                         Toast.makeText(Register.this, "Registrado correctamente", Toast.LENGTH_SHORT).show();
-                         Intent intent = new Intent(Register.this, Login.class);
-                         startActivity(intent);
+                        Intent intent = new Intent(Register.this, Login.class);
+                        startActivity(intent);
                     }).addOnFailureListener(e -> {
                         Toast.makeText(Register.this, "Error registrando usuario", Toast.LENGTH_SHORT).show();
                     });

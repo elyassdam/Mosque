@@ -39,7 +39,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance();
 
@@ -48,31 +47,6 @@ public class Login extends AppCompatActivity {
         checkBoxRemember = findViewById(R.id.checkBoxRemember);
         spinnerLanguage = findViewById(R.id.spinnerLanguage);
 
-       /* ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.languages, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLanguage.setAdapter(adapter);
-
-        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String language = "en"; // default to English
-                switch (position) {
-                    case 1:
-                        language = "es"; // Spanish
-                        break;
-                    case 2:
-                        language = "ar"; // Arabic
-                        break;
-                }
-                setLocale(language);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
-            }
-        });
-*/
         Button btnIniciar = findViewById(R.id.btnInicio);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +81,7 @@ public class Login extends AppCompatActivity {
         editTextContraseña.setText(contraseñaGuardada);
         checkBoxRemember.setChecked(rememberMeChecked);
 
-       if (rememberMeChecked && !correoGuardado.isEmpty() && !contraseñaGuardada.isEmpty()) {
+        if (rememberMeChecked && !correoGuardado.isEmpty() && !contraseñaGuardada.isEmpty()) {
             // Intentar iniciar sesión automáticamente
             usuarioRegistrado(correoGuardado, contraseñaGuardada);
         }
@@ -120,7 +94,7 @@ public class Login extends AppCompatActivity {
                 if (!querySnapshot.isEmpty()) {
                     for (DocumentSnapshot documentSnapshot : querySnapshot.getDocuments()) {
                         User usuario = documentSnapshot.toObject(User.class);
-                        if (usuario != null && usuario.getPassword().equals(contraseña)) {
+                        if (usuario != null && PasswordHasher.verifyPassword(contraseña, usuario.getPassword())) {
                             // El usuario está registrado y la contraseña coincide
                             Toast.makeText(Login.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
                             if (checkBoxRemember.isChecked()) {
@@ -128,7 +102,7 @@ public class Login extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("correo", correo);
-                                editor.putString("contraseña", contraseña);
+                                editor.putString("contraseña", contraseña); // Consider not saving plain text password here
                                 editor.putBoolean("rememberMeChecked", true);
                                 editor.apply();
                             }
